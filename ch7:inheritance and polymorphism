@@ -1,0 +1,72 @@
+inheritance and polymorphism:
+Using IS-A and HAS-A:
+To know if you’ve designed your types correctly, ask, “Does it make sense to say type X IS-A type Y?” 
+
+if we apply the IS-A test, Tub IS-A Bathroom is definitely false.
+
+Tub and Bathroom are related, but not through inheritance. Tub and Bathroom are joined by a HAS-A relationship. In other words, Bathroom has a reference to a Tub, but Bathroom does not extend Tub and
+vice-versa.
+
+f your inheritance tree is well-designed, the IS-A test should make sense when you ask any subclass if it IS-A any of its supertypes
+
+If class B extends class A, class B IS-A class A. This is true anywhere in the inheritance tree. If class C extends class B, class C passes the IS-A test for both B and A.
+
+Keep in mind that the inheritance IS-A relationship works in only one direction!
+all teachers 'r humans but not all humans 're teachers!.
+
+
+Access levels control who sees what:
+public members are inherited
+private members are not inherited
+
+VERY IMPORTANT NOTE:
+Don't use inheritance for ONLY re-use code, Is-A relationship must be achieved.
+ex: don't make Dog extends piano only because both make sound!!.
+
+So what does all this inheritance really buy you?
+1. You avoid duplicate code. Put common code in one place, and let the subclasses inherit that code from a superclass. When you want to change that behavior, you have to modify it in only 
+one place, and everybody else (i.e. all thesubclasses) see the change.
+
+2. You define a common protocol for a group of classes.
+
+Polymorphism
+with Polymorphism the reference and the object can be different. 
+Animal myDog = new Dog();
+in more general:
+SuperType instance = new SubType();
+instance.doWhatever();  //doWhaterver 'll be perfom depending on the child class type.
+
+Very Good Example:
+Animal[] animals = new Animal[5];
+animals [0] = new Dog();
+animals [1] = new Cat();
+animals [2] = new Wolf();
+animals [3] = new Hippo();
+animals [4] = new Lion();
+for (int i = 0; i < animals.length; i++) {
+
+ animals[i].eat();
+
+ animals[i].roam();
+}
+
+Another one:
+class Vet {
+ public void giveShot(Animal a) {
+ // do horrible things to the Animal at
+ // the other end of the ‘a’ parameter
+ a.makeNoise();
+ }
+}
+
+When a class can't be extended?
+1.when it's not public(can't be even accesses outside its package)
+2.when it's final class(security resasons)
+3.when have only private constructor.
+
+
+Typically, you won’t make your classes final. But if you need security — the security of knowing that the methods will always work the way that you wrote them (because they can’t be overridden),
+a final class will give you that. A lot of classes in the Java API are final for that reason. The String class, for example, is final
+because, well, imagine the havoc if somebody came along and changed the way Strings behave!
+
+Although, you can prevent only specific methods from being overrided by marked it final.
